@@ -5,3 +5,5 @@ INSERT INTO burgers (burger_name, devoured) VALUES (
     (`Cheeses Is Born Burger`, false),
     (`Open Sesame Burger`, false)
 );
+
+FROM burgers_db.burgers;
