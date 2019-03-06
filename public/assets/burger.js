@@ -1,12 +1,13 @@
 $(function () {
-    $(".devourBurger").on("click", function () {
+    console.log('TEST', $('.eatburger'));
+    $(document).on("click", ".eatburger", function () {
+        console.log('got here');
         event.preventDefault();
         var id = $(this).data("burgerid");
 
         var newDevourState = {
             devoured: 1
         };
-
         // Send the PUT request.
         $.ajax("/api/burgers/" + id, {
             type: "PUT",
@@ -33,23 +34,26 @@ $(function () {
         $.ajax("/api/burgers", {
             type: "POST",
             data: newBurger
-        }).then(
+        }).done(
             function () {
-
                 console.log("created new burger");
                 // Reload the page to get the updated list
                 // eslint-disable-next-line no-undef
                 location.reload();
             }
+        ).fail(
+            function () {
+                console.log('test');
+            }
         );
     });
 
-    $('.trashburger'.on('click', function (event) {
+    $('.trashburger').on('click', function (event) {
         event.preventDefault();
         var id = $(this).data('id');
         $.ajax({
             type: 'DELETE',
             url: '/api/burgers/' + id
         }).then(location.reload());
-    }))
+    })
 });

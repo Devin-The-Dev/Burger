@@ -33,6 +33,7 @@ var orm = {
     },
     //Insert data
     insertOne: function (tableInput, columnInput, val, cb) {
+        console.log(val);
         var queryString = 'INSERT INTO ' + tableInput + ' (' + columnInput.toString() + ') ' + 'VALUES (' + createQmarks(val.length) + ') ';
         console.log(queryString);
         connection.query(queryString, val, function (err, result) {
@@ -42,9 +43,9 @@ var orm = {
     },
     //Update data
     updateOne: function (tableInput, objColVal, condition, cb) {
-        var queryString = 'UPDATE ' + tableInput + 'SET' + translateSql(objColVal) + ' WHERE ' + condition;
+        var queryString = 'UPDATE ' + tableInput + ' SET ' + translateSql(objColVal) + ' WHERE ' + condition;
         console.log(queryString);
-        connection.query(queryString, val, function (err, result) {
+        connection.query(queryString, objColVal, function (err, result) {
             if (err) { throw err };
             cb(result);
         });
